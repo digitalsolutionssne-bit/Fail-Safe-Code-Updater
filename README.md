@@ -38,21 +38,26 @@ Follow these steps to deploy your own isolated instance of the App Code Maintain
     * Click **New repository secret** and add the following three secrets:
         1. `GAS_SCRIPT_ID`: Paste the Script ID from Phase 2 Step 10.
         2. `GAS_DEPLOYMENT_ID`: Paste the Deployment ID from Phase 2 Step 9.
-        3. `CLASP_CREDENTIALS`: You need to log in via `clasp` locally to get this token. 
-            * Open a local terminal with Node.js installed.
+        3. `CLASP_CREDENTIALS`: You will generate this using GitHub Codespaces directly in your browser.
+            * Go to the main page of your repository.
+            * Click the green **<> Code** button, switch to the **Codespaces** tab, and click **Create codespace on main**.
+            * Wait for the web editor to load, then click into the terminal panel at the bottom.
             * Run: `npm install -g @google/clasp`
-            * Run: `clasp login`
-            * A browser will open. Log in with your new Google Account and grant permissions.
-            * Open the hidden `~/.clasprc.json` file on your computer (On Windows: `C:\Users\YourUsername\.clasprc.json`, On Mac/Linux: `~/.clasprc.json`). 
-            * Copy its **entire** contents and paste it as the value for the `CLASP_CREDENTIALS` secret.
+            * Run: `clasp login --no-localhost`
+            * It will provide a URL. Open that URL in a new browser tab, log in with your Google Account, and click "Allow".
+            * Google will display an authorization code. Copy it, paste it back into your Codespaces terminal, and hit Enter.
+            * Run: `cat ~/.clasprc.json`
+            * Copy the **entire JSON output** printed in the terminal and paste it as the value for the `CLASP_CREDENTIALS` secret.
+            * (You can now close and delete the Codespace).
 
 ### Phase 4: Enable Actions & Update Variables
 1. Go to the **Actions** tab in your GitHub repository.
 2. Click **"I understand my workflows, go ahead and enable them"**.
-3. Edit the `updater.js` file in your GitHub repository to link everything together:
-    * **Top of the file:** Update `GAS_WEB_APP_URL` with your new Web App URL (from Phase 2 Step 9).
-    * **Bottom of the file (System Maintenance Section):** Update `targetRepo` with your specific `"username/repo-name"`, and update `targetFolderId` with the Google Drive Folder ID you created in Phase 1.
-4. Commit your changes to `updater.js`. This commit will automatically trigger a GitHub Action to deploy the updated backend code securely!
+3. Edit the `config.js` file in your GitHub repository to link everything together:
+    * Update `GAS_WEB_APP_URL` with your new Web App URL (from Phase 2 Step 9).
+    * Update `TARGET_REPO` with your specific `"username/repo-name"`.
+    * Update `TARGET_FOLDER_ID` with the Google Drive Folder ID you created in Phase 1.
+4. Commit your changes to `config.js`. This commit will automatically trigger a GitHub Action to deploy the updated backend code securely!
 
 ### Phase 5: Create GitHub Fine-Grained Token (For UI Usage)
 To actually use the web tool to push updates to your repositories:
