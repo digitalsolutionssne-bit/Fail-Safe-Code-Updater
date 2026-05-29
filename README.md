@@ -1,5 +1,3 @@
-# https://digitalsolutionssne-bit.github.io/Fail-Safe-Code-Updater/
-
 # Fail-Safe-Code-Updater
 
 ## Complete Deployment Guide (New GitHub & Google Accounts)
