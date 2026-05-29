@@ -2,8 +2,8 @@
 // App Code Maintainer - Client-Side Logic
 // ==========================================
 
-// --- HARDCODED BACKEND CONFIGURATION ---
-const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxrvR-INi3X6cVNG2GgccCHwm8WIK7yc7w_qEC5LNN1OuUBNk77aqSDuW5XZ5ryUwPgjQ/exec";
+// --- BACKEND CONFIGURATION (Loaded from config.js) ---
+const GAS_WEB_APP_URL = typeof APP_CONFIG !== 'undefined' ? APP_CONFIG.GAS_WEB_APP_URL : '';
 
 // --- UTILITY LOGIC & STATE ---
 const statusMsg = document.getElementById('status-message');
@@ -31,6 +31,14 @@ const selectedFolderInfo = document.getElementById('selected-folder-info');
 let activeSelectedFolder = null; 
 
 document.addEventListener("DOMContentLoaded", () => {
+// Dynamically set application name from config.js
+if (typeof APP_CONFIG !== 'undefined' && APP_CONFIG.APP_NAME) {
+    const appTitle = document.getElementById('app-title');
+    const appHeaderName = document.getElementById('app-header-name');
+    if (appTitle) appTitle.textContent = APP_CONFIG.APP_NAME;
+    if (appHeaderName) appHeaderName.textContent = APP_CONFIG.APP_NAME;
+}
+
 tokenInput.value = localStorage.getItem('acm_gh_token') || '';
 folderInput.value = localStorage.getItem('acm_drive_folder') || '';
 branchInput.value = localStorage.getItem('acm_gh_branch') || 'main';
@@ -140,7 +148,7 @@ const token = document.getElementById('gh-token').value.trim();
 const folderInputVal = document.getElementById('gh-drive-folder').value.trim();
 
 if (!GAS_WEB_APP_URL || GAS_WEB_APP_URL === "YOUR_GAS_WEB_APP_URL_HERE") {
-    throw new Error("GAS Web App URL is missing. Please hardcode it in updater.js.");
+    throw new Error("GAS Web App URL is missing. Please configure it in config.js.");
 }
 if (!repo || !branch || !token || !folderInputVal) {
     throw new Error("All configuration fields in Step 1 are required.");
@@ -736,10 +744,15 @@ if (!token) {
     return;
 }
 
-// Hardcoded configuration for this specific system tool bypasses the general UI selectors
-const targetRepo = "weronedatabase-tech/Fail-Safe-Code-Updater";
-const targetFolderId = "1u0irLS2iRZX9Tpx92uazdRukTemA3pLL";
-const targetBranch = "main";
+// Configuration for this specific system tool bypasses the general UI selectors (Loaded from config.js)
+const targetRepo = typeof APP_CONFIG !== 'undefined' && APP_CONFIG.TARGET_REPO ? APP_CONFIG.TARGET_REPO : "weronedatabase-tech/Fail-Safe-Code-Updater";
+const targetFolderId = typeof APP_CONFIG !== 'undefined' && APP_CONFIG.TARGET_FOLDER_ID ? APP_CONFIG.TARGET_FOLDER_ID : "1u0irLS2iRZX9Tpx92uazdRukTemA3pLL";
+const targetBranch = typeof APP_CONFIG !== 'undefined' && APP_CONFIG.TARGET_BRANCH ? APP_CONFIG.TARGET_BRANCH : "main";
+
+if (!targetRepo || !targetFolderId || !targetBranch) {
+    setStatus("System Maintenance configuration missing in config.js.", "error");
+    return;
+}
 
 try {
     btn.disabled = true;
