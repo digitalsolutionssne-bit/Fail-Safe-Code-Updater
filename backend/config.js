@@ -10,7 +10,7 @@ TARGET_REPO: "digitalsolutionssne-bit/Fail-Safe-Code-Updater",
 TARGET_FOLDER_ID: "1_vb2nSCTPfRj9lzcZcjTqYRMicIWHFqa",
 TARGET_BRANCH: "main",
 LINKS: {
-  TEMPLATE_PROMPT: "https://docs.google.com/document/d/1Fq5UK1ucjfZD9Aau0yP6-I-yPKyfL-l_5USWjggQURU/edit?usp=drive_link",
+  TEMPLATE_PROMPT: "https://docs.google.com/document/d/14jWtT2-HmKxQHDEf5hMPO24XnkCOnXnaSorqCXF5BIA",
   TKN: "https://docs.google.com/document/d/1XpIhmVrElmD4wd5z1qU70JW28g8V81vzgR1R2ELkJBo/edit?usp=drive_link"
 }
 };
