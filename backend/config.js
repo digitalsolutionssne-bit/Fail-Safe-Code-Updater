@@ -11,6 +11,6 @@ TARGET_FOLDER_ID: "1_vb2nSCTPfRj9lzcZcjTqYRMicIWHFqa",
 TARGET_BRANCH: "main",
 LINKS: {
   TEMPLATE_PROMPT: "https://docs.google.com/document/d/14jWtT2-HmKxQHDEf5hMPO24XnkCOnXnaSorqCXF5BIA",
-  TKN: "https://docs.google.com/document/d/1XpIhmVrElmD4wd5z1qU70JW28g8V81vzgR1R2ELkJBo/edit?usp=drive_link"
+  TKN: "https://docs.google.com/document/d/1OZUQTmiq3vxQRnURulLmqGwtZCq9bjhh_WJeoMtKrFw/edit?usp=drivesdk"
 }
 };
